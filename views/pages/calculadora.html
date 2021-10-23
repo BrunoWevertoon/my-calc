@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Calculadora</title>
     <meta charset="utf-8" />
-<style> table{
+
+    <style>
+     table{
     text-align: center;
     margin: auto;
     padding: 25px;
 }
 .botao{
     background-color:rgb(16, 122, 500);
-    font-size: 14px;
+    font-size: 24px;
 margin: auto;
 width: 45px;
 height: 60px;
 }
 body {
-background-color:rgb(15, 10, 10);
+background-color:black;
 }
 .calculator {
             position: absolute;
-            background-color:  #CCCCCC;
+            background-color: #CCCCCC ;
 top: 30%;
-left: 50%;
+left: 40%;
 transform: translate(-50%, -50%);
-border: 20px;
-padding: 20px;
+border-radius: 20px;
+padding: 50px;
         }
 #display {
 width: 400px;
@@ -47,117 +49,109 @@ width: 50px;
 height: 25px;
 }
 
+#outHistorico{
+         
+          background-color: #ececec;
+          width: 239px;
+          height: 300px;
+          border-radius: 7px;
+          position: absolute;
+          left: 65%;
+          top: 2px;
+        }
+       
+        .historico{
+            position: absolute;
+            background-color:  #CCCCCC;
+           
+top: 50%;
+left: 50%;
+transform: translate(50%);
+border-radius: 15px;
+padding: 20px;
+        }
 
 </style>
-</head>
-<body>
-<form name="sci-calc">
-<table class="calculator" cellspacing="0" cellpadding="3">
-<tr>
-<td colspan="5"><input id="display" name="display" value="0" size="28" maxlength="25"></td>
-</tr>
-
-<tr>
-
-   
-    <td><input type="button" class="btnNum" name="btnOpps" value="√" onclick="if(checkNum(this.form.display.value)) { sqrt(this.form) }"></td>
-    <td><input type="button" class="btnNum" value="x&sup2" onclick="if(checkNum(this.form.display.value)) { square(this.form) }"></td>
-    <td><input type="button" class="btnNum" value="÷" onclick="addChar(this.form.display, '/')"></td>
-    <td><input type="button" class="btnNum" value="%" onclick=" percent(this.form.display)"></td>
-    <td><input type="button" class="btnNum" value="C" id="btLimpar"></td>
-
-</tr>
-
-   <tr>
-    <td><input type="button" class="btnNum" value="7" onclick="addChar(this.form.display, '7')"></td>
-    <td><input type="button" class="btnNum" value="8" onclick="addChar(this.form.display, '8')"></td>
-    <td><input type="button" class="btnNum"  value="9" onclick="addChar(this.form.display, '9')"></td>
-    <td><input type="button" class="btnNum" value="÷" onclick="addChar(this.form.display, '/')"></td>
-   
-</tr>
-
-<tr>
-<td><input type="button" class="btnNum" value="4" onclick="addChar(this.form.display, '4')"></td>
-<td><input type="button" class="btnNum" value="5" onclick="addChar(this.form.display, '5')"></td>
-<td><input type="button" class="btnNum" value="6" onclick="addChar(this.form.display, '6')"></td>
-<td><input type="button" class="btnNum" value="*" onclick="addChar(this.form.display, '*')"></td>
-
-</tr>
-
-<tr>
-    <td><input type="button" class="btnNum" value="1" onclick="addChar(this.form.display, '1')"></td>
-    <td><input type="button" class="btnNum" value="2" onclick="addChar(this.form.display, '2')"></td>
-    <td><input type="button" class="btnNum" value="3" onclick="addChar(this.form.display, '3')"></td>
-    <td><input type="button" class="btnNum" value="-" onclick="addChar(this.form.display, '-')"></td>
-    </tr>
-
-    <tr>
-        <td><input type="button" class="btnNum" value="0" onclick="addChar(this.form.display, '0')"></td>
-        <td><input type="button" class="btnNum" value="." onclick="addChar(this.form.display, '.')"></td>
-        <td rowspan="5"><input type="button" class="botao" value= "=" onclick="if(checkNum(this.form.display.value)) { compute(this.form) }"></td>
-        <td><input type="button" class="btnNum" value="+" onclick="addChar(this.form.display, '+')"></td>
-    </tr>
-
-    <tr>
+  </head>
+  <body>
+   <div class="global">
+        <table>
+            <tr>
+                <td colspan="6"><p class="in_text" id="display" value="0" disabled>0</p></td>
+                <td rowspan="9" colspan="6"><p class="historico" id="outHistorico" disabled>Historico: <br></p></td>
+            </tr>
+            <tr>
+                <td><input type="button" class="botao_nan" value="C" onclick="limparDisplay()" /></td>
+                <td><input type="button" class="botao_nan" value="(" onclick="atualizarDisplay('(')" /></td>
+                <td><input type="button" class="botao_nan" value=")" onclick="atualizarDisplay(')')" /></td>
+                <td><input type="button" class="botao_nan" value="÷" onclick="atualizarDisplay('/')" /></td>
+                <td><input type="button" class="botao_nan" value="√" onclick="calcularRaiz()" /></td>
+            </tr>
+            <tr>
+                <td><input type="button" class="botao" value="7" onclick="atualizarDisplay('7')" /></td>
+                <td><input type="button" class="botao" value="8" onclick="atualizarDisplay('8')" /></td>
+                <td><input type="button" class="botao" value="9" onclick="atualizarDisplay('9')" /></td>
+                <td><input type="button" class="botao_nan" value="×" onclick="atualizarDisplay('*')" /></td>
+                <td><input type="button" class="botao_nan" value="x²" onclick="atualizarDisplay('**2')" /></td>
+            </tr>
+            <tr>
+                <td><input type="button" class="botao" value="4" onclick="atualizarDisplay('4')" /></td>
+                <td><input type="button" class="botao" value="5" onclick="atualizarDisplay('5')" /></td>
+                <td><input type="button" class="botao" value="6" onclick="atualizarDisplay('6')" /></td>
+                <td><input type="button" class="botao_nan" value="-" onclick="atualizarDisplay('-')" /></td>
+                <td><input type="button" class="botao_nan" value="%" onclick="atualizarDisplay('*0.01')" /></td>
+            </tr>
+            <tr>
+                <td><input type="button" class="botao" value="1" onclick="atualizarDisplay('1')" /></td>
+                <td><input type="button" class="botao" value="2" onclick="atualizarDisplay('2')" /></td>
+                <td><input type="button" class="botao" value="3" onclick="atualizarDisplay('3')" /></td>
+                <td><input type="button" class="botao_nan" value="+" onclick="atualizarDisplay('+')" /></td>
+                <td rowspan="2"><input type="button" class="botao_ig" value="=" onclick="calcularOperacao()" /></td>
+            </tr>
+            <tr>
+                <td><input type="button" class="botao_lh" value="🧹" onclick="limparHistorico()" /></td>
+                <td><input type="button" class="botao" value="0" onclick="atualizarDisplay('0')" /></td>
+                <td><input type="button" class="botao_nan" value="." onclick="atualizarDisplay('.')" /></td>
+                <td><input type="button" class="botao_nan" value="«" onclick="desfazerDisplay()" /></td>
+            </tr>
+        </table>
+    </div>
+      <script>
+     
+        function atualizarDisplay(num){
+            var display = document.getElementById('display').innerHTML;
+            if(display === '0') document.getElementById('display').innerHTML = num;
+            else document.getElementById('display').innerHTML += num
+        }
+        function desfazerDisplay() {
+            var display = document.getElementById('display').innerHTML;
+            document.getElementById('display').innerHTML = display.substring(0, display.length - 1);
+        }
+        function limparDisplay(){
+            document.getElementById('display').innerHTML = "0";
+        }
+        function limparHistorico(){
+            document.getElementById('outHistorico').innerHTML = "Historico: <br>";
+        }
+        var historico = ''
+        function calcularOperacao(){
+            var display = document.getElementById('display').innerHTML;
+            var historico = document.getElementById('display').innerHTML;
+            if (display) {
+                document.getElementById('display').innerHTML = eval(display);
+            }
+            document.getElementById('outHistorico').innerHTML += historico + '=' + eval(display) + ' █ ';
+        }
+        function calcularRaiz(){
+            var display = document.getElementById('display').innerHTML;
+            var historico = document.getElementById('display').innerHTML;
+            if (display) {
+                document.getElementById('display').innerHTML = Math.sqrt(eval(display));
                
-        <td><input type="button" class="btnNum" value="(" onclick="addChar(this.form.display, '(')"></td>
-        <td><input type="button" class="btnNum" value=")" onclick="addChar(this.form.display,')')"></td>
-        <td><input type="button" class="btnNum" name="btnTop" value="DEL" onclick="deleteChar(this.form.display)"></td>
-    </tr>
-   
+            }
+            document.getElementById('outHistorico').innerHTML += '√(' + historico + ') =' + Math.sqrt(eval(display)) + ' █ ';
+        }
+    </script>
 
-</table>
-</form>
-<script>
-btLimpar.addEventListener("click", limparCampos);
-function limparCampos(){
-    display.value = "";
-    display.focus();
-}
-
-function addChar(input, character) {
-if(input.value == null || input.value == "0")
-input.value = character
-else
-input.value += character
-}
-
-function deleteChar(input) {
-input.value = input.value.substring(0, input.value.length - 1)
-}
-
-function percent(input) {
-input.value =  input.value /100;
-}
-
-function compute(form) {
-form.display.value = eval(form.display.value);
-}
-
-function square(form) {
-form.display.value = eval(form.display.value) * eval(form.display.value)
-}
-
-function sqrt(form) {
-form.display.value = Math.sqrt(form.display.value);
-}
-
-function checkNum(str) {
-for (var i = 0; i < str.length; i++) {
-var ch = str.charAt(i);
-if (ch < "0" || ch > "9") {
-if (ch != "/" && ch != "*" && ch != "+" && ch != "-" && ch != "."
-&& ch != "(" && ch!= ")" && ch != "%") {
-alert("invalid entry!")
-return false
-}
-}
-}
-return true
-}
-
-
-
-</script>
-</body>
+  </body>
 </html>
